@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuu351wdtvt5o"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_efhx8"]
+load_path = "res://.godot/imported/midfloor.png-fcdefaa85d21abc5b0b4dfe2a5d0d055.ctex"
+
+[sub_resource type="RectangleShape2D" id="1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tkttc"]
+load_path = "res://.godot/imported/ramp2.png-3381b791c6fd22be14d85a2451356629.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ff6ij"]
+load_path = "res://.godot/imported/bottom-flat.png-896bc073a2905379fa94956e2f1d034c.ctex"
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(20, 3.44172)
+
+[node name="GravityTilemap" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("CompressedTexture2D_efhx8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(-0.215604, 16.0447)
+scale = Vector2(3.18059, 1.57468)
+shape = SubResource("1")
+
+[node name="Sprite2" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("CompressedTexture2D_tkttc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2/StaticBody2D"]
+polygon = PackedVector2Array(-31.4728, 0.329071, -17.323, -0.946732, 4.24972, -13.1249, 31.7375, -31.566, 31.7375, 31.7603, -32.0527, 31.7603)
+
+[node name="Sprite3" type="Sprite2D" parent="."]
+texture = SubResource("CompressedTexture2D_ff6ij")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite3/StaticBody2D"]
+position = Vector2(0.0163631, 31.8951)
+scale = Vector2(3.18951, 1)
+shape = SubResource("2")
