@@ -1,8 +1,12 @@
 extends StaticBody2D
+# Behaviour of a power up
+#
+# - It can add fuel
+# - It can add life
+
 
 @export var extra_fuel: int;
 @export var extra_life: int;
-
 
 func _ready():
 	# Called every time the node is added to the scene.

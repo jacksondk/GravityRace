@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+# The player object login
+
 var start_position
 var in_goal = false
 
@@ -21,13 +23,6 @@ signal goal_entered
 signal crashed
 signal exit
 
-func _on_goal_entered(body):
-	in_goal = true;
-	emit_signal("goal_entered", true)
-
-func _on_goal_exit(body):
-	in_goal = false;
-
 func set_start_position(position):
 	start_position = position
 	self.position = position
@@ -38,16 +33,16 @@ func add_fuel(extra_fuel):
 func add_life(extra_life):
 	life = min(life + extra_life, max_life)
 
+# Setup game based on the levels properties
 func _ready():
 	set_physics_process(true)
 	gui = self.get_parent().get_node("CanvasLayer/GUI")
 	level_node = self.get_parent();
-	level_node.get_node("Goal").connect("body_entered", Callable(self, "_on_goal_entered"))
-	level_node.get_node("Goal").connect("body_exited", Callable(self, "_on_goal_exit"))
 
 	if level_node.has_node("Powerups"):
-		powerups = self.get_parent().get_node("Powerups")
+		powerups = level_node.get_node("Powerups")
 		print("Found %d power ups" % powerups.get_child_count())
+
 	var properties = level_node.get_start_properties()
 	fuel = properties["fuel"]
 	max_fuel = properties["max_fuel"]
@@ -100,13 +95,15 @@ func _process(delta):
 	speed = speed + force*delta
 	
 	var collision = self.move_and_collide(speed*delta)
-	
+
 	gui.set_velocity(floor(speed.length()/5)*5)
 	if collision:
 		if powerups and powerups.is_ancestor_of(collision.get_collider()):
 			var powup = collision.get_collider()
 			powup.apply_powerup(self)
 			powup.get_parent().remove_child(powup)
+		elif level_node.get_node("Goal/CollisionShape2D"):
+			emit_signal("goal_entered", true)
 		else:
 			var collision_speed = floor(speed.length()/5)
 			if collision_speed > 5:
