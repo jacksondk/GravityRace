@@ -49,7 +49,6 @@ func _ready():
 	life = properties["life"]
 	max_life = properties["max_life"]
 
-
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
@@ -93,16 +92,18 @@ func _process(delta):
 	force = force - (level_node.get_drag()*extra_drag)*sqrt(speed.dot(speed))*speed.normalized()
 	
 	speed = speed + force*delta
+	gui.set_velocity(floor(speed.length()/5)*5)
 	
 	var collision = self.move_and_collide(speed*delta)
-
-	gui.set_velocity(floor(speed.length()/5)*5)
 	if collision:
-		if powerups and powerups.is_ancestor_of(collision.get_collider()):
+		var collider = collision.get_collider()
+		print("Collision with: " + str(collider) + ", class: " + collider.get_class() + ", name: " + collider.name + ", path: " + str(collider.get_path()))
+		if powerups and powerups.is_ancestor_of(collider):
 			var powup = collision.get_collider()
 			powup.apply_powerup(self)
 			powup.get_parent().remove_child(powup)
-		elif level_node.get_node("Goal/CollisionShape2D"):
+		elif level_node.get_node("Goal") == collider:
+			print("Goal ancestor detected!")
 			emit_signal("goal_entered", true)
 		else:
 			var collision_speed = floor(speed.length()/5)
@@ -111,7 +112,6 @@ func _process(delta):
 				gui.set_life(life, max_life)
 				if life <= 0:
 					life = 0
-					$GPUParticles2D.emitting = true
 					self.get_node("AnimatedSprite2D").visible = false
 					self.get_node("AudioStreamPlayer2").playing = true
 					self.get_node("Timer").connect("timeout", Callable(self, "dead"))
@@ -119,5 +119,6 @@ func _process(delta):
 			speed = Vector2(0,0)
 	gui.set_life(life, max_life)
 	
+
 func dead():
 	emit_signal("crashed")
