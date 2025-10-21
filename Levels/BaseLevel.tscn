@@ -1,13 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bjtadb40850oi"]
 
-[ext_resource path="res://Scripts/BaseLevel.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://uhosviqnttr6" path="res://Scripts/BaseLevel.gd" id="1"]
 
 [node name="BaseLevel" type="CharacterBody2D"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 1 )
-
-
+script = ExtResource("1")

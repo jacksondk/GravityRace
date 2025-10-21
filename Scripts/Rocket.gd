@@ -48,12 +48,16 @@ func _ready():
 	max_fuel = properties["max_fuel"]
 	life = properties["life"]
 	max_life = properties["max_life"]
-
+	
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
 	if life <= 0:
 		return
+	gui.set_life(life, max_life)
+	gui.set_fuel(fuel, max_fuel)
+	
+
 
 	if Input.is_action_pressed("ui_cancel"):
 		emit_signal("exit")
@@ -117,7 +121,6 @@ func _process(delta):
 					self.get_node("Timer").connect("timeout", Callable(self, "dead"))
 					self.get_node("Timer").start()
 			speed = Vector2(0,0)
-	gui.set_life(life, max_life)
 	
 
 func dead():
