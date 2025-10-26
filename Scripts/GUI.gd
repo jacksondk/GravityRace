@@ -7,11 +7,16 @@ var best_time = -1
 var score_label
 var best_label
 var last_label
-var speed_label
 var current_level
+
+var speed_label
+var speed_progress
+
 var life_label
 var life_progress
 var fuel_label
+var fuel_progress
+
 var started = false
 
 func _ready():
@@ -19,10 +24,12 @@ func _ready():
 	score_label = self.get_node("HBoxContainer/GridContainer/TimeLabel")
 	best_label = self.get_node("HBoxContainer/GridContainer/BestTimeLabel")
 	last_label = self.get_node("HBoxContainer/GridContainer/LastTimeLabel")
-	speed_label = self.get_node("HBoxContainer/VBoxContainer2/Speed")
-	life_label = self.get_node("HBoxContainer/VBoxContainer2/Life")
-	life_progress = self.get_node("HBoxContainer/VBoxContainer2/HBoxContainer/TextureProgressBar")
-	fuel_label = self.get_node("HBoxContainer/VBoxContainer2/Fuel")
+	speed_label = self.get_node("HBoxContainer/StatusContainer/SpeedContainer/SpeedLabel")
+	speed_progress = self.get_node("HBoxContainer/StatusContainer/SpeedContainer/SpeedProgressBar")
+	life_label = self.get_node("HBoxContainer/StatusContainer/LifeContainer/LifeLabel")	
+	life_progress = self.get_node("HBoxContainer/StatusContainer/LifeContainer/LifeProgressBar")
+	fuel_label = self.get_node("HBoxContainer/StatusContainer/FuelContainer/FuelLabel")
+	fuel_progress = self.get_node("HBoxContainer/StatusContainer/FuelContainer/FuelProgressBar")
 
 func start():
 	if not started:
@@ -42,6 +49,7 @@ func _process(delta):
 	
 func set_velocity(speed):
 	speed_label.text = "%.f" % ((floor(speed/5)*5)/10.0)
+	speed_progress.value = speed
 
 func set_life(life, max_life):
 	life_label.text = str(life)
@@ -50,6 +58,7 @@ func set_life(life, max_life):
 
 func set_fuel(fuel, max_fuel):
 	fuel_label.text = "%.1f" % fuel
+	fuel_progress.value = (fuel/max_fuel)*100
 
 func set_level(level):
 	current_level = level

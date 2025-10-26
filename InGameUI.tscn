@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://eals8m240w30"]
+[gd_scene load_steps=2 format=3 uid="uid://eals8m240w30"]
 
 [ext_resource type="Script" uid="uid://ledfamf3oagp" path="res://Scripts/GUI.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://u1mj13b702v8" path="res://Graphics/progressbar_bg.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://draceyvvnfwyj" path="res://Graphics/progressbar_fill.png" id="3"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -49,37 +47,48 @@ custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/HBoxContainer"]
+[node name="StatusContainer" type="VBoxContainer" parent="GUI/HBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="Speed" type="Label" parent="GUI/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(400, 0)
+[node name="LifeContainer" type="HBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
 layout_mode = 2
-text = "Speed"
-horizontal_alignment = 2
+alignment = 2
 
-[node name="Fuel" type="Label" parent="GUI/HBoxContainer/VBoxContainer2"]
+[node name="LifeLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/LifeContainer"]
+layout_mode = 2
+text = "Life"
+
+[node name="LifeProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/LifeContainer"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+rounded = true
+
+[node name="FuelContainer" type="HBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
+layout_mode = 2
+
+[node name="FuelLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/FuelContainer"]
 layout_mode = 2
 text = "Fuel"
 horizontal_alignment = 2
 
-[node name="Life" type="Label" parent="GUI/HBoxContainer/VBoxContainer2"]
+[node name="FuelProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/FuelContainer"]
 layout_mode = 2
-text = "Life"
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+
+[node name="SpeedContainer" type="HBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/SpeedContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Speed"
 horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/HBoxContainer/VBoxContainer2"]
+[node name="SpeedProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/SpeedContainer"]
 layout_mode = 2
-alignment = 2
-
-[node name="Label" type="Label" parent="GUI/HBoxContainer/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "Life"
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="GUI/HBoxContainer/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-value = 30.0
-texture_under = ExtResource("2")
-texture_over = ExtResource("2")
-texture_progress = ExtResource("3")
+size_flags_horizontal = 3
