@@ -120,7 +120,9 @@ func _process(delta):
 					self.get_node("AudioStreamPlayer2").playing = true
 					self.get_node("Timer").connect("timeout", Callable(self, "dead"))
 					self.get_node("Timer").start()
-			speed = Vector2(0,0)
+				speed = speed.bounce(collision.get_normal())*0.3
+			else:
+				speed = speed.bounce(collision.get_normal())*0.9
 	
 
 func dead():
