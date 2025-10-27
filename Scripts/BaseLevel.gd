@@ -42,7 +42,7 @@ func get_drag():
 	return 0.1
 
 func get_rotate_speed():
-	return 1.8
+	return 8.8
 
 func get_gravity():
 	return Vector2(0,1)*9.8

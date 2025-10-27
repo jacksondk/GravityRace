@@ -6,6 +6,8 @@ var start_position
 var in_goal = false
 
 var speed = Vector2(0,0)
+var rotation_speed = 0
+
 var life
 var max_life
 
@@ -63,11 +65,11 @@ func _process(delta):
 		emit_signal("exit")
 	
 	if Input.is_action_pressed("ui_right"):
-		self.rotate(level_node.get_rotate_speed()*delta)
+		rotation_speed += level_node.get_rotate_speed()*delta;		
 		started = true
 		gui.start()
 	if Input.is_action_pressed("ui_left"):
-		self.rotate(-level_node.get_rotate_speed()*delta)
+		rotation_speed -= level_node.get_rotate_speed()*delta;		
 		started = true
 		gui.start()
 
@@ -97,7 +99,9 @@ func _process(delta):
 	
 	speed = speed + force*delta
 	gui.set_velocity(floor(speed.length()/5)*5)
+	rotation_speed -= rotation_speed*level_node.get_drag()/2
 	
+	self.rotate(rotation_speed*delta)
 	var collision = self.move_and_collide(speed*delta)
 	if collision:
 		var collider = collision.get_collider()
