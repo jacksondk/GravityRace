@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxrck8h3lo6nq"]
+
+[ext_resource type="Script" uid="uid://cuxo4vgdo142t" path="res://Levels/GoalArea.gd" id="1_tg0ql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dl8mf"]
+size = Vector2(62, 15)
+
+[node name="Goal" type="Area2D"]
+script = ExtResource("1_tg0ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.48435926, 0.28339222, 0.46842182, 1)
+shape = SubResource("RectangleShape2D_dl8mf")
+debug_color = Color(0.89494425, 0.19541427, 0.63153553, 0.41960785)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.6049859, 0.18496189, 0.30489525, 1)
+polygon = PackedVector2Array(-23, -6, 23, -3, 15, 3, -19, 4)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

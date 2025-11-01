@@ -3,6 +3,7 @@ extends CharacterBody2D
 # The player object login
 
 var start_position
+var in_goal_start = 0
 var in_goal = false
 
 var speed = Vector2(0,0)
@@ -44,22 +45,27 @@ func _ready():
 	if level_node.has_node("Powerups"):
 		powerups = level_node.get_node("Powerups")
 		print("Found %d power ups" % powerups.get_child_count())
-
+	
 	var properties = level_node.get_start_properties()
 	fuel = properties["fuel"]
 	max_fuel = properties["max_fuel"]
 	life = properties["life"]
 	max_life = properties["max_life"]
 	
-func _process(delta):
-	# Called every frame. Delta is time since last frame.
-	# Update game logic here.
+	# When the goal area signals that we have been there long enough
+	# then we finish the level
+	var goal = level_node.get_node("Goal")
+	if goal:
+		goal.connect("player_stayed_long_enough", Callable(self, "finish"))
+	
+func finish(player = null):	
+	emit_signal("goal_entered", true)
+	
+func _process(delta):	
 	if life <= 0:
 		return
 	gui.set_life(life, max_life)
 	gui.set_fuel(fuel, max_fuel)
-	
-
 
 	if Input.is_action_pressed("ui_cancel"):
 		emit_signal("exit")
@@ -99,20 +105,20 @@ func _process(delta):
 	
 	speed = speed + force*delta
 	gui.set_velocity(floor(speed.length()/5)*5)
-	rotation_speed -= rotation_speed*level_node.get_drag()/2
+	rotation_speed -= rotation_speed*level_node.get_drag()
 	
 	self.rotate(rotation_speed*delta)
 	var collision = self.move_and_collide(speed*delta)
-	if collision:
+	if not collision:
+		in_goal_start = 0
+	else:
 		var collider = collision.get_collider()
-		print("Collision with: " + str(collider) + ", class: " + collider.get_class() + ", name: " + collider.name + ", path: " + str(collider.get_path()))
+		#print("Collision with: " + str(collider) + ", class: " + collider.get_class() + ", name: " + collider.name + ", path: " + str(collider.get_path()))
+		#print("Speed " + str(speed.length()))
 		if powerups and powerups.is_ancestor_of(collider):
 			var powup = collision.get_collider()
 			powup.apply_powerup(self)
 			powup.get_parent().remove_child(powup)
-		elif level_node.get_node("Goal") == collider:
-			print("Goal ancestor detected!")
-			emit_signal("goal_entered", true)
 		else:
 			var collision_speed = floor(speed.length()/5)
 			if collision_speed > 5:
@@ -124,10 +130,9 @@ func _process(delta):
 					self.get_node("AudioStreamPlayer2").playing = true
 					self.get_node("Timer").connect("timeout", Callable(self, "dead"))
 					self.get_node("Timer").start()
-				speed = speed.bounce(collision.get_normal())*0.3
-			else:
 				speed = speed.bounce(collision.get_normal())*0.9
-	
+			else:
+				speed = speed.bounce(collision.get_normal())*0.3
 
 func dead():
 	emit_signal("crashed")
