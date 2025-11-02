@@ -8,7 +8,7 @@ var rocket = preload("res://Rocket.tscn")
 
 func _init(level):
 	self.level = level
-	
+
 func new_rocket():
 	self.remove_child(self.get_node("Rocket"))
 	
