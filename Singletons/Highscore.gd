@@ -16,8 +16,8 @@ func _init():
 
 
 # Set the user name - store it for next run
-func set_user_name(name):
-	current_name = name
+func set_user_name(user_name):
+	current_name = user_name
 	var f = FileAccess.open("user://user.txt", FileAccess.WRITE)
 	f.store_line(current_name)
 	f.close()

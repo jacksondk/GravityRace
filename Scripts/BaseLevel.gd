@@ -8,8 +8,8 @@ var level_tree
 
 var rocket = preload("res://Rocket.tscn")
 
-func _init(level):
-	self.level = level
+func _init(_level):
+	self.level = _level
 	level_tree = get_tree()
 
 func new_rocket():
@@ -53,7 +53,7 @@ func _ready():
 	gui.set_best(best_time)
 	new_rocket()
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func get_drag():

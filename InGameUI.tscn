@@ -47,48 +47,44 @@ custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatusContainer" type="VBoxContainer" parent="GUI/HBoxContainer"]
+[node name="StatusContainer" type="HBoxContainer" parent="GUI/HBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="LifeContainer" type="HBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
+[node name="Labels" type="VBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
 layout_mode = 2
-alignment = 2
 
-[node name="LifeLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/LifeContainer"]
+[node name="LifeLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/Labels"]
 layout_mode = 2
 text = "Life"
 
-[node name="LifeProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/LifeContainer"]
+[node name="FuelLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/Labels"]
+layout_mode = 2
+text = "Fuel"
+horizontal_alignment = 2
+
+[node name="SpeedLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/Labels"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Speed"
+horizontal_alignment = 2
+
+[node name="ProgressBars" type="VBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
+layout_mode = 2
+
+[node name="LifeProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/ProgressBars"]
 custom_minimum_size = Vector2(128, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
 rounded = true
 
-[node name="FuelContainer" type="HBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
-layout_mode = 2
-
-[node name="FuelLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/FuelContainer"]
-layout_mode = 2
-text = "Fuel"
-horizontal_alignment = 2
-
-[node name="FuelProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/FuelContainer"]
+[node name="FuelProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/ProgressBars"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 100.0
 
-[node name="SpeedContainer" type="HBoxContainer" parent="GUI/HBoxContainer/StatusContainer"]
-layout_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="GUI/HBoxContainer/StatusContainer/SpeedContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Speed"
-horizontal_alignment = 2
-
-[node name="SpeedProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/SpeedContainer"]
+[node name="SpeedProgressBar" type="ProgressBar" parent="GUI/HBoxContainer/StatusContainer/ProgressBars"]
 layout_mode = 2
 size_flags_horizontal = 3

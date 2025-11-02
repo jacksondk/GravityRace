@@ -7,9 +7,11 @@ signal player_stayed_long_enough(player: Node)
 var player_inside: bool = false
 var time_inside: float = 0.0
 var current_player: Node = null
+var goal_reached: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	goal_reached = false
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,8 +24,10 @@ func _process(delta: float) -> void:
 			# Optional: reset to prevent re-trigger
 			
 			
-func _on_player_stayed_long_enough() -> void:	
-	emit_signal("player_stayed_long_enough", current_player)
+func _on_player_stayed_long_enough() -> void:
+	if goal_reached == false:
+		goal_reached = true
+		emit_signal("player_stayed_long_enough", current_player)
 
 func _on_body_entered(body: Node) -> void:
 	if body.name == "Rocket":

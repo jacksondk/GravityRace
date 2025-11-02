@@ -24,19 +24,20 @@ func _ready():
 	score_label = self.get_node("HBoxContainer/GridContainer/TimeLabel")
 	best_label = self.get_node("HBoxContainer/GridContainer/BestTimeLabel")
 	last_label = self.get_node("HBoxContainer/GridContainer/LastTimeLabel")
-	speed_label = self.get_node("HBoxContainer/StatusContainer/SpeedContainer/SpeedLabel")
-	speed_progress = self.get_node("HBoxContainer/StatusContainer/SpeedContainer/SpeedProgressBar")
-	life_label = self.get_node("HBoxContainer/StatusContainer/LifeContainer/LifeLabel")	
-	life_progress = self.get_node("HBoxContainer/StatusContainer/LifeContainer/LifeProgressBar")
-	fuel_label = self.get_node("HBoxContainer/StatusContainer/FuelContainer/FuelLabel")
-	fuel_progress = self.get_node("HBoxContainer/StatusContainer/FuelContainer/FuelProgressBar")
+	
+	speed_label = self.get_node("HBoxContainer/StatusContainer/Labels/SpeedLabel")
+	speed_progress = self.get_node("HBoxContainer/StatusContainer/ProgressBars/SpeedProgressBar")
+	life_label = self.get_node("HBoxContainer/StatusContainer/Labels/LifeLabel")	
+	life_progress = self.get_node("HBoxContainer/StatusContainer/ProgressBars/LifeProgressBar")
+	fuel_label = self.get_node("HBoxContainer/StatusContainer/Labels/FuelLabel")
+	fuel_progress = self.get_node("HBoxContainer/StatusContainer/ProgressBars/FuelProgressBar")
 
 func start():
 	if not started:
 		start_time = Time.get_ticks_msec()
 		started = true
 
-func _process(delta):
+func _process(_delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.	
 	if started:

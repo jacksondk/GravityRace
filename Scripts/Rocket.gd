@@ -26,9 +26,9 @@ signal goal_entered
 signal crashed
 signal exit
 
-func set_start_position(position):
-	start_position = position
-	self.position = position
+func set_start_position(st_position):
+	start_position = st_position
+	self.position = st_position
 
 func add_fuel(extra_fuel):
 	fuel = min(fuel + extra_fuel, max_fuel)
