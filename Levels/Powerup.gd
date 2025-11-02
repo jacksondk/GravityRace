@@ -4,7 +4,6 @@ extends StaticBody2D
 # - It can add fuel
 # - It can add life
 
-
 @export var extra_fuel: int;
 @export var extra_life: int;
 

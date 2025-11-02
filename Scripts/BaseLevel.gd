@@ -19,7 +19,6 @@ func new_rocket():
 	rocket_instance.connect("exit", Callable(self, "exit"))
 	self.add_child(rocket_instance)
 
-
 func reset(goal):
 	gui.reset(goal)
 	exit()
