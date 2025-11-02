@@ -58,8 +58,25 @@ func _ready():
 	if goal:
 		goal.connect("player_stayed_long_enough", Callable(self, "finish"))
 	
-func finish(player = null):	
-	emit_signal("goal_entered", true)
+func finish(player = null):
+	# Compute elapsed time since level start (ms)
+	var elapsed = 0
+	if "start_time" in level_node:
+		elapsed = Time.get_ticks_msec() - level_node.start_time
+	# build a details dictionary with time, fuel, life and score
+	var details = {
+		"level": level_node.level,
+		"time": elapsed,
+		"fuel": fuel,
+		"life": life,
+		"score": int(elapsed) # currently score is just time in ms
+	}
+	# notify the level to record/transition to score scene
+	if level_node.has_method("record_score"):
+		level_node.record_score(details)
+	else:
+		# fallback: emit existing signal
+		emit_signal("goal_entered", true)
 	
 func _process(delta):	
 	if life <= 0:

@@ -17,9 +17,10 @@ func _process(delta: float) -> void:
 	if player_inside:
 		time_inside += delta		
 		if time_inside >= required_time:
+			player_inside = false
 			_on_player_stayed_long_enough()
 			# Optional: reset to prevent re-trigger
-			player_inside = false
+			
 			
 func _on_player_stayed_long_enough() -> void:	
 	emit_signal("player_stayed_long_enough", current_player)

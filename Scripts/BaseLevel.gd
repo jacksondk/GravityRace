@@ -3,11 +3,14 @@ extends Node2D
 var start_pos;
 var gui
 var level
+var start_time = 0
+var level_tree
 
 var rocket = preload("res://Rocket.tscn")
 
 func _init(level):
 	self.level = level
+	level_tree = get_tree()
 
 func new_rocket():
 	self.remove_child(self.get_node("Rocket"))
@@ -19,12 +22,28 @@ func new_rocket():
 	rocket_instance.connect("exit", Callable(self, "exit"))
 	self.add_child(rocket_instance)
 
+	# record the time the run started
+	start_time = Time.get_ticks_msec()
+
 func reset(goal):
-	gui.reset(goal)
+	# gui may be null in some cases (e.g., scene not fully initialised). Guard against that.
+	if gui:
+		if "reset" in gui:
+			gui.reset(goal)
+		else:
+			print("GUI node has no reset() method")
+	else:
+		print("Warning: gui is null in BaseLevel.reset()")
 	exit()
 
+
+func record_score(details):
+	# details should be a Dictionary containing level, time, fuel, life, score
+	Highscore.set_pending_score(details)
+	get_tree().change_scene_to_file("res://score.tscn")
+
 func exit():
-	self.get_tree().change_scene_to_file("res://score.tscn")
+	get_tree().change_scene_to_file("res://score.tscn")
 
 func _ready():
 	start_pos = self.get_node("Rocket").position

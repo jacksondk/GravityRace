@@ -8,6 +8,7 @@ extends Node
 
 var current_name
 var last_score
+var pending_score = null
 
 func _init():
 	# Ensure the user name is initialised
@@ -40,6 +41,13 @@ func file_name(level):
 func get_last_score():
 	return last_score
 
+
+func set_pending_score(details : Dictionary):
+	# details expected to contain: level, time, fuel, life, score
+	pending_score = details
+
+func get_pending_score():
+	return pending_score
 
 # Get the high score for a given level
 func get_best(level):
