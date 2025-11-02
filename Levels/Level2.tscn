@@ -381,7 +381,6 @@ script = ExtResource("3")
 
 [node name="Rocket" parent="." instance=ExtResource("4")]
 position = Vector2(184.612, 409.791)
-scale = Vector2(0.3, 0.5)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("5")]
 

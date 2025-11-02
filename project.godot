@@ -29,4 +29,5 @@ window/size/viewport_height=768
 textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.056291588, 0.056291603, 0.056291573, 1)
+2d/snap/snap_2d_transforms_to_pixel=true
 environment/defaults/default_environment="res://default_env.tres"

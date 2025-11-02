@@ -85,6 +85,7 @@ func _process(delta):
 	gui.set_fuel(fuel, max_fuel)
 
 	if Input.is_action_pressed("ui_cancel"):
+		# Should be restart
 		emit_signal("exit")
 	
 	if Input.is_action_pressed("ui_right"):

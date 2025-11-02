@@ -13,14 +13,13 @@ func _init(_level):
 	level_tree = get_tree()
 
 func new_rocket():
-	self.remove_child(self.get_node("Rocket"))
-	
-	var rocket_instance = rocket.instantiate()
-	rocket_instance.set_start_position(start_pos)
-	rocket_instance.connect("goal_entered", Callable(self, "reset"))
-	rocket_instance.connect("crashed", Callable(self, "reset").bind(false))
-	rocket_instance.connect("exit", Callable(self, "exit"))
-	self.add_child(rocket_instance)
+	#self.remove_child(self.get_node("Rocket"))	
+	#var rocket_instance = rocket.instantiate()
+	#rocket_instance.set_start_position(start_pos)
+	#rocket_instance.connect("goal_entered", Callable(self, "reset"))
+	#rocket_instance.connect("crashed", Callable(self, "reset").bind(false))
+	#rocket_instance.connect("exit", Callable(self, "exit"))
+	#self.add_child(rocket_instance)
 
 	# record the time the run started
 	start_time = Time.get_ticks_msec()
