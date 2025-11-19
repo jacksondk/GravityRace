@@ -19,6 +19,7 @@ config/icon="res://Player/rocket-power2.png"
 
 Highscore="*res://Singletons/Highscore.tscn"
 GlobalState="*res://Singletons/GlobalState.tscn"
+Fade="*res://Singletons/Fade.tscn"
 
 [display]
 

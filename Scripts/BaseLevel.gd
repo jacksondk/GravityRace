@@ -39,10 +39,10 @@ func reset(goal):
 func record_score(details):
 	# details should be a Dictionary containing level, time, fuel, life, score
 	Highscore.set_pending_score(details)
-	get_tree().change_scene_to_file("res://score.tscn")
+	Fade.change_scene_to_file("res://score.tscn")
 
 func exit():
-	get_tree().change_scene_to_file("res://score.tscn")
+	Fade.change_scene_to_file("res://score.tscn")
 
 func _ready():
 	start_pos = self.get_node("Rocket").position
@@ -59,7 +59,7 @@ func get_drag():
 	return 0.1
 
 func get_rotate_speed():
-	return 8.8
+	return 15
 
 func get_gravity():
 	return Vector2(0,1)*9.8

@@ -50,9 +50,9 @@ func start():
 	Highscore.set_name($HBoxContainer/VBoxContainer2/PlayerNameTextEdit.text)
 	match level:
 		0: 
-			self.get_tree().change_scene_to_file("res://Levels/Level1.tscn")
+			Fade.change_scene_to_file("res://Levels/Level1.tscn")
 		1:
-			self.get_tree().change_scene_to_file("res://Levels/Level2.tscn")
+			Fade.change_scene_to_file("res://Levels/Level2.tscn")
 		
 
 func _process(_delta):

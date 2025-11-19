@@ -8,7 +8,7 @@ var pending = null
 
 
 func goToStartScene():
-	self.get_tree().change_scene_to_file("res://start.tscn")
+	Fade.change_scene_to_file("res://start.tscn")
 
 
 func _ready():
