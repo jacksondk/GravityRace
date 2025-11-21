@@ -91,25 +91,22 @@ func _process(delta):
 	gui.set_life(life, max_life)
 	gui.set_fuel(fuel, max_fuel)
 
-# TODO: Move to base level
-	#if Input.is_action_pressed("ui_cancel"):
-		#emit_signal("exit")
-	
 	if Input.is_action_pressed("ui_right"):
-		rotation_speed += level_node.get_rotate_speed()*delta;		
+		rotation_speed += level_node.rotate_speed * delta;		
 		started = true
 		gui.start()
 	if Input.is_action_pressed("ui_left"):
-		rotation_speed -= level_node.get_rotate_speed()*delta;		
+		rotation_speed -= level_node.rotate_speed * delta;		
 		started = true
 		gui.start()
 
-	var force = level_node.get_gravity()
+	# Add up forces
+	var force = level_node.gravity
 	if Input.is_action_pressed("ui_up") and fuel > 0:
 		gui.start()
 		started = true
 		var dir_rad = self.get_transform().get_rotation()
-		var dir = Vector2(0,-1).rotated(dir_rad)*level_node.get_thrust()
+		var dir = Vector2(0,-1).rotated(dir_rad)*level_node.thrust
 		force = force + dir
 		self.get_node("AnimatedSprite2D").play("power")
 		if not self.get_node("AudioStreamPlayer").playing:
@@ -126,11 +123,11 @@ func _process(delta):
 	
 	if not started:
 		return
-	force = force - (level_node.get_drag()*extra_drag)*sqrt(speed.dot(speed))*speed.normalized()
+	force = force - (level_node.drag*extra_drag)*sqrt(speed.dot(speed))*speed.normalized()
 	
 	speed = speed + force*delta
 	gui.set_velocity(floor(speed.length()/5)*5)
-	rotation_speed -= rotation_speed*level_node.get_drag()
+	rotation_speed -= rotation_speed*level_node.drag
 	
 	self.rotate(rotation_speed*delta)
 	var collision = self.move_and_collide(speed*delta)
@@ -159,6 +156,6 @@ func _process(delta):
 				speed = speed.bounce(collision.get_normal())*0.3
 
 func restart():
-	print("Restart")
+	# Make the rocket visible and return to start
 	self.get_node("AnimatedSprite2D").visible = true
 	level_node.new_rocket()

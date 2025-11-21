@@ -10,8 +10,22 @@ func _init(_level):
 	self.level = _level
 	level_tree = get_tree()
 
+func _ready():
+	rocket_start_pos = self.get_node("Rocket").position
+	var best_time = Highscore.get_best(level)
+	gui = self.get_node("CanvasLayer/GUI")
+	gui.set_level(level)
+	gui.set_best(best_time)
+	new_rocket()
+
+func _process(_delta: float):
+	if Input.is_action_pressed("ui_cancel"):
+		Fade.change_scene_to_file("res://start.tscn")
+	if Input.is_action_pressed("ui_home"):
+		new_rocket()
+
 func new_rocket():
-	# record the time the run started	
+	# record the time the run started
 	var rocket = get_node("Rocket")
 	rocket.reset_to_start()
 	gui.stop()
@@ -36,31 +50,10 @@ func record_score(details):
 func exit():
 	Fade.change_scene_to_file("res://score.tscn")
 
-func _ready():
-	rocket_start_pos = self.get_node("Rocket").position
-	var best_time = Highscore.get_best(level)
-	gui = self.get_node("CanvasLayer/GUI")
-	gui.set_level(level)	
-	gui.set_best(best_time)
-	new_rocket()
-	
-func _process(delta: float):
-	if Input.is_action_pressed("ui_cancel"):
-		Fade.change_scene_to_file("res://start.tscn")
-	if Input.is_action_pressed("ui_home"):
-		new_rocket()
-
-func get_drag():
-	return 0.1
-
-func get_rotate_speed():
-	return 15
-
-func get_gravity():
-	return Vector2(0,1)*9.8
-	
-func get_thrust():
-	return 10*9.8
+@export var drag : float = 0.1
+@export var gravity : Vector2 = Vector2(0,1)*9.8
+@export var thrust : float = 10*9.8
+@export var rotate_speed : float = 15
 
 func get_start_properties():
 	return {'fuel': 200.0, 'max_fuel': 200.0, 'life': 100.0, 'max_life': 100.0}

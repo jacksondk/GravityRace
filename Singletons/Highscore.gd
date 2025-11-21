@@ -14,7 +14,6 @@ func _init():
 	# Ensure the user name is initialised
 	get_user_name()
 
-
 # Set the user name - store it for next run
 func set_user_name(user_name):
 	current_name = user_name

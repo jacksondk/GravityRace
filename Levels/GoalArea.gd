@@ -12,18 +12,15 @@ var goal_reached: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	goal_reached = false
-	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player_inside:
-		time_inside += delta		
+		time_inside += delta
 		if time_inside >= required_time:
 			player_inside = false
 			_on_player_stayed_long_enough()
-			# Optional: reset to prevent re-trigger
-			
-			
+
 func _on_player_stayed_long_enough() -> void:
 	if goal_reached == false:
 		goal_reached = true

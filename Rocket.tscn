@@ -65,3 +65,4 @@ volume_db = -23.27
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
 wait_time = 3.0
+one_shot = true
