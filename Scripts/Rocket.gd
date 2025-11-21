@@ -12,10 +12,11 @@ var rotation_speed = 0
 var life
 var max_life
 
-#var max_collision_speed = 200
-var gui
 var fuel
 var max_fuel
+
+var gui
+
 var extra_drag
 
 var powerups
@@ -26,9 +27,9 @@ signal goal_entered
 signal crashed
 signal exit
 
-func set_start_position(st_position):
-	start_position = st_position
-	self.position = st_position
+#func set_start_position(st_position):
+	#start_position = st_position
+	#self.position = st_position
 
 func add_fuel(extra_fuel):
 	fuel = min(fuel + extra_fuel, max_fuel)
@@ -36,8 +37,19 @@ func add_fuel(extra_fuel):
 func add_life(extra_life):
 	life = min(life + extra_life, max_life)
 
+func reset_to_start():
+	started = false
+	position = start_position
+	rotation = 0
+	fuel = max_fuel
+	life = max_life
+	speed = Vector2(0,0)
+	rotation_speed = 0
+	
+
 # Setup game based on the levels properties
 func _ready():
+	start_position = position
 	set_physics_process(true)
 	gui = self.get_parent().get_node("CanvasLayer/GUI")
 	level_node = self.get_parent();

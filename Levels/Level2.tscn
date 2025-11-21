@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://clwbjs1b4bjs"]
+[gd_scene load_steps=9 format=4 uid="uid://clwbjs1b4bjs"]
 
 [ext_resource type="Script" uid="uid://db02833a8o8yn" path="res://Scripts/Level2.gd" id="1"]
-[ext_resource type="Script" uid="uid://disn15qukxk3u" path="res://Scripts/ViewportContainer.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://cmh0tcvki0uny" path="res://Rocket.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://eals8m240w30" path="res://InGameUI.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://Levels/Powerup.tscn" id="6"]
@@ -377,7 +376,6 @@ offset_top = 126.0
 offset_right = 224.0
 offset_bottom = 313.0
 mouse_filter = 0
-script = ExtResource("3")
 
 [node name="Rocket" parent="." instance=ExtResource("4")]
 position = Vector2(184.612, 409.791)

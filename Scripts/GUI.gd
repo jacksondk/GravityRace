@@ -37,6 +37,10 @@ func start():
 		start_time = Time.get_ticks_msec()
 		started = true
 
+func stop():
+	if started:
+		started = false
+
 func _process(_delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.	

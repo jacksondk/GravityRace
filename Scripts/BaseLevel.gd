@@ -1,27 +1,21 @@
 extends Node2D
 
-var start_pos;
+var rocket_start_pos;
 var gui
 var level
 var start_time = 0
 var level_tree
 
-var rocket = preload("res://Rocket.tscn")
+# var rocket = preload("res://Rocket.tscn")
 
 func _init(_level):
 	self.level = _level
 	level_tree = get_tree()
 
 func new_rocket():
-	#self.remove_child(self.get_node("Rocket"))	
-	#var rocket_instance = rocket.instantiate()
-	#rocket_instance.set_start_position(start_pos)
-	#rocket_instance.connect("goal_entered", Callable(self, "reset"))
-	#rocket_instance.connect("crashed", Callable(self, "reset").bind(false))
-	#rocket_instance.connect("exit", Callable(self, "exit"))
-	#self.add_child(rocket_instance)
-
-	# record the time the run started
+	# record the time the run started	
+	var rocket = get_node("Rocket")
+	rocket.reset_to_start()	
 	start_time = Time.get_ticks_msec()
 
 func reset(goal):
@@ -35,7 +29,6 @@ func reset(goal):
 		print("Warning: gui is null in BaseLevel.reset()")
 	exit()
 
-
 func record_score(details):
 	# details should be a Dictionary containing level, time, fuel, life, score
 	Highscore.set_pending_score(details)
@@ -45,15 +38,16 @@ func exit():
 	Fade.change_scene_to_file("res://score.tscn")
 
 func _ready():
-	start_pos = self.get_node("Rocket").position
+	rocket_start_pos = self.get_node("Rocket").position
 	var best_time = Highscore.get_best(level)
 	gui = self.get_node("CanvasLayer/GUI")
 	gui.set_level(level)	
 	gui.set_best(best_time)
 	new_rocket()
-
-func _process(_delta):
-	pass
+	
+func _process(delta: float):
+	if Input.is_action_pressed("ui_home"):
+		new_rocket()
 
 func get_drag():
 	return 0.1
