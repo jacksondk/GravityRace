@@ -25,11 +25,6 @@ var started = false
 
 signal goal_entered
 signal crashed
-signal exit
-
-#func set_start_position(st_position):
-	#start_position = st_position
-	#self.position = st_position
 
 func add_fuel(extra_fuel):
 	fuel = min(fuel + extra_fuel, max_fuel)
@@ -96,9 +91,9 @@ func _process(delta):
 	gui.set_life(life, max_life)
 	gui.set_fuel(fuel, max_fuel)
 
-	if Input.is_action_pressed("ui_cancel"):
-		# Should be restart
-		emit_signal("exit")
+# TODO: Move to base level
+	#if Input.is_action_pressed("ui_cancel"):
+		#emit_signal("exit")
 	
 	if Input.is_action_pressed("ui_right"):
 		rotation_speed += level_node.get_rotate_speed()*delta;		
@@ -143,13 +138,12 @@ func _process(delta):
 		in_goal_start = 0
 	else:
 		var collider = collision.get_collider()
-		#print("Collision with: " + str(collider) + ", class: " + collider.get_class() + ", name: " + collider.name + ", path: " + str(collider.get_path()))
-		#print("Speed " + str(speed.length()))
 		if powerups and powerups.is_ancestor_of(collider):
 			var powup = collision.get_collider()
 			powup.apply_powerup(self)
 			powup.get_parent().remove_child(powup)
 		else:
+			print(str(life))
 			var collision_speed = floor(speed.length()/5)
 			if collision_speed > 5:
 				life = life - int(collision_speed)
@@ -158,11 +152,13 @@ func _process(delta):
 					life = 0
 					self.get_node("AnimatedSprite2D").visible = false
 					self.get_node("AudioStreamPlayer2").playing = true
-					self.get_node("Timer").connect("timeout", Callable(self, "dead"))
+					self.get_node("Timer").connect("timeout", Callable(self, "restart"))
 					self.get_node("Timer").start()
 				speed = speed.bounce(collision.get_normal())*0.9
 			else:
 				speed = speed.bounce(collision.get_normal())*0.3
 
-func dead():
-	emit_signal("crashed")
+func restart():
+	print("Restart")
+	self.get_node("AnimatedSprite2D").visible = true
+	level_node.new_rocket()

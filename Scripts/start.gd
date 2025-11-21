@@ -3,7 +3,6 @@ extends MarginContainer
 var level_list
 var high_score_list
 
-
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
@@ -25,7 +24,6 @@ func select_level(index):
 	index = max(0,index)
 	index = min(level_list.item_count,index)	
 	level_list.select(index, true)
-	print("Select level " + str(index))
 	GlobalState.set_current_level(index)
 	setup_high_score(index+1)
 
@@ -56,8 +54,6 @@ func start():
 		
 
 func _process(_delta):
-	# Called every frame. Delta is time since last frame.
-	# Update game logic here.
 	if Input.is_action_pressed("ui_accept"):
 		start()
 	elif Input.is_action_just_pressed("ui_up"):

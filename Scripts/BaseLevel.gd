@@ -6,8 +6,6 @@ var level
 var start_time = 0
 var level_tree
 
-# var rocket = preload("res://Rocket.tscn")
-
 func _init(_level):
 	self.level = _level
 	level_tree = get_tree()
@@ -15,7 +13,8 @@ func _init(_level):
 func new_rocket():
 	# record the time the run started	
 	var rocket = get_node("Rocket")
-	rocket.reset_to_start()	
+	rocket.reset_to_start()
+	gui.stop()
 	start_time = Time.get_ticks_msec()
 
 func reset(goal):
@@ -46,6 +45,8 @@ func _ready():
 	new_rocket()
 	
 func _process(delta: float):
+	if Input.is_action_pressed("ui_cancel"):
+		Fade.change_scene_to_file("res://start.tscn")
 	if Input.is_action_pressed("ui_home"):
 		new_rocket()
 

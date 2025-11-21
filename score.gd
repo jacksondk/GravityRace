@@ -1,11 +1,6 @@
 extends MarginContainer
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 var pending = null
-
 
 func goToStartScene():
 	Fade.change_scene_to_file("res://start.tscn")

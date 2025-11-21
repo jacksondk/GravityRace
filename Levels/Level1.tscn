@@ -1,13 +1,14 @@
 [gd_scene load_steps=12 format=4 uid="uid://bebst5p22jyip"]
 
 [ext_resource type="Script" uid="uid://ucbmkog0d585" path="res://Scripts/Level1.gd" id="1"]
-[ext_resource type="Script" uid="uid://disn15qukxk3u" path="res://Scripts/ViewportContainer.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://cmh0tcvki0uny" path="res://Rocket.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://eals8m240w30" path="res://InGameUI.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://Levels/Powerup.tscn" id="6"]
 [ext_resource type="Texture2D" uid="uid://ce1qb40ksg7wh" path="res://tiles_demo.png" id="6_05pb0"]
 [ext_resource type="Texture2D" uid="uid://bx1keavg4v43c" path="res://Graphics/TileSet v1.0.png" id="7_dl8mf"]
 [ext_resource type="PackedScene" uid="uid://bxrck8h3lo6nq" path="res://Levels/Goal.tscn" id="8_xcayt"]
+
+[sub_resource type="GDScript" id="GDScript_dl8mf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dl8mf"]
 resource_name = "maptiles"
@@ -502,7 +503,7 @@ offset_top = 152.0
 offset_right = 442.0
 offset_bottom = 664.0
 mouse_filter = 0
-script = ExtResource("3")
+script = SubResource("GDScript_dl8mf")
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
