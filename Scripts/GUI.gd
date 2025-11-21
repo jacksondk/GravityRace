@@ -59,11 +59,13 @@ func set_velocity(speed):
 func set_life(life, max_life):
 	life_label.text = str(life)
 	life_progress.value = (life / max_life)*100
+	life_progress.modulate = lerp(Color.RED, Color.LAWN_GREEN, life_progress.get_as_ratio())
 	
 
 func set_fuel(fuel, max_fuel):
 	fuel_label.text = "%.1f" % fuel
 	fuel_progress.value = (fuel/max_fuel)*100
+	fuel_progress.modulate = lerp(Color.RED, Color.LAWN_GREEN, fuel_progress.get_as_ratio())
 
 func set_level(level):
 	current_level = level
