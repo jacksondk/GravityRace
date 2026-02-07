@@ -3,7 +3,7 @@ extends MarginContainer
 var pending = null
 
 func goToStartScene():
-	Fade.change_scene_to_file("res://start.tscn")
+	Fade.change_scene_to_file("res://UIScenes/start.tscn")
 
 
 func _ready():

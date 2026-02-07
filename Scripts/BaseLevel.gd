@@ -20,7 +20,7 @@ func _ready():
 
 func _process(_delta: float):
 	if Input.is_action_pressed("ui_cancel"):
-		Fade.change_scene_to_file("res://start.tscn")
+		Fade.change_scene_to_file("res://UIScenes/start.tscn")
 	if Input.is_action_pressed("ui_home"):
 		new_rocket()
 
@@ -45,10 +45,10 @@ func reset(goal):
 func record_score(details):
 	# details should be a Dictionary containing level, time, fuel, life, score
 	Highscore.set_pending_score(details)
-	Fade.change_scene_to_file("res://score.tscn")
+	Fade.change_scene_to_file("res://UIScenes/score.tscn")
 
 func exit():
-	Fade.change_scene_to_file("res://score.tscn")
+	Fade.change_scene_to_file("res://UIScenes/score.tscn")
 
 @export var drag : float = 0.1
 @export var gravity : Vector2 = Vector2(0,1)*9.8

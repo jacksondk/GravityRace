@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="GravityRace"
-run/main_scene="res://start.tscn"
-config/features=PackedStringArray("4.5")
+run/main_scene="res://UIScenes/start.tscn"
+config/features=PackedStringArray("4.6")
 config/icon="res://Player/rocket-power2.png"
 
 [autoload]

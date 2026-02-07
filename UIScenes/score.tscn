@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bptuipqfgayoi"]
+
+[ext_resource type="Script" uid="uid://cda7oiiaxporx" path="res://Scripts/score.gd" id="1_vf1ye"]
+
+[node name="MarginContainer" type="MarginContainer" unique_id=1981240769]
+anchors_preset = -1
+anchor_right = 0.049000002
+anchor_bottom = 0.053000003
+offset_left = 84.0
+offset_right = 779.552
+offset_bottom = 474.296
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+script = ExtResource("1_vf1ye")
+
+[node name="VBox" type="GridContainer" parent="." unique_id=481292307]
+layout_mode = 2
+columns = 2
+
+[node name="NameLabel" type="Label" parent="VBox" unique_id=1808544837]
+layout_mode = 2
+text = "Name:"
+
+[node name="NameEdit" type="LineEdit" parent="VBox" unique_id=1379561183]
+layout_mode = 2
+placeholder_text = "Player name"
+
+[node name="ScoreLabel" type="Label" parent="VBox" unique_id=2065106575]
+layout_mode = 2
+text = "Score:"
+
+[node name="ScoreValue" type="Label" parent="VBox" unique_id=209574747]
+layout_mode = 2
+text = "0"
+
+[node name="DetailsLabel" type="Label" parent="VBox" unique_id=557191120]
+layout_mode = 2
+text = "Details:"
+
+[node name="Details" type="Label" parent="VBox" unique_id=1718675222]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="VBox" unique_id=1864883989]
+layout_mode = 2
+text = "Save and Return"

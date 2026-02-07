@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://bebst5p22jyip"]
+[gd_scene format=4 uid="uid://bebst5p22jyip"]
 
 [ext_resource type="Script" uid="uid://ucbmkog0d585" path="res://Scripts/Level1.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cmh0tcvki0uny" path="res://Rocket.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://eals8m240w30" path="res://InGameUI.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://eals8m240w30" path="res://UIScenes/InGameUI.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://Levels/Powerup.tscn" id="6"]
-[ext_resource type="Texture2D" uid="uid://ce1qb40ksg7wh" path="res://tiles_demo.png" id="6_05pb0"]
+[ext_resource type="Texture2D" uid="uid://ce1qb40ksg7wh" path="res://Graphics/tiles_demo.png" id="6_05pb0"]
 [ext_resource type="Texture2D" uid="uid://bx1keavg4v43c" path="res://Graphics/TileSet v1.0.png" id="7_dl8mf"]
 [ext_resource type="PackedScene" uid="uid://bxrck8h3lo6nq" path="res://Levels/Goal.tscn" id="8_xcayt"]
 
@@ -494,10 +494,10 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_dl8mf")
 sources/2 = SubResource("TileSetAtlasSource_xcayt")
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Node2D" unique_id=2064671239]
 script = ExtResource("1")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=299669968]
 offset_left = -70.0
 offset_top = 152.0
 offset_right = 442.0
@@ -505,27 +505,27 @@ offset_bottom = 664.0
 mouse_filter = 0
 script = SubResource("GDScript_dl8mf")
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=949080159]
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="Rocket" parent="." instance=ExtResource("4")]
+[node name="Rocket" parent="." unique_id=389679316 instance=ExtResource("4")]
 position = Vector2(270, 354)
 
-[node name="CanvasLayer" parent="." instance=ExtResource("5")]
+[node name="CanvasLayer" parent="." unique_id=538921029 instance=ExtResource("5")]
 
-[node name="Powerups" type="Node2D" parent="."]
+[node name="Powerups" type="Node2D" parent="." unique_id=202814827]
 
-[node name="Powerup" parent="Powerups" instance=ExtResource("6")]
+[node name="Powerup" parent="Powerups" unique_id=577921154 instance=ExtResource("6")]
 position = Vector2(185, 309)
 extra_fuel = 50
 extra_life = 10
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=116254044]
 tile_map_data = PackedByteArray("AAARAAcAAAAQAAMAAAACAAwAAgABAAEAAAADAAwAAgABAAEAAAAEAAwAAgABAAEAAAAFAAwAAgABAAEAAAAGAAwAAgABAAEAAAAHAAwAAgABAAEAAAAIAAwAAgABAAEAAAAJAAwAAgABAAEAAAAKAAkAAgABAAEAAAAKAAsAAgABAAEAAAAKAAoAAgABAAEAAAAKAAwAAgABAAEAAAABAAwAAgABAAEAAAABAAsAAgABAAEAAAABAAoAAgABAAEAAAABAAkAAgABAAEAAAABAAgAAgABAAEAAAABAAcAAgABAAEAAAABAAYAAgABAAEAAAABAAUAAgABAAEAAAABAAQAAgABAAEAAAAKAAgAAgABAAEAAAAKAAcAAgABAAEAAAALAAYAAgABAAEAAAAKAAYAAgABAAEAAAALAAkAAgABAAEAAAALAAcAAgABAAEAAAALAAgAAgABAAEAAAACAAMAAgABAAEAAAADAAMAAgABAAEAAAAEAAMAAgABAAEAAAAFAAMAAgABAAEAAAAGAAMAAgABAAEAAAAHAAMAAgABAAEAAAAIAAMAAgABAAEAAAAJAAMAAgABAAEAAAAKAAMAAgABAAEAAAALAAMAAgABAAEAAAAMAAMAAgABAAEAAAANAAMAAgABAAEAAAAOAAMAAgABAAEAAAAPAAMAAgABAAEAAAAQAAMAAgABAAEAAAAQAAUAAgABAAEAAAAQAAYAAgABAAEAAAAQAAcAAgABAAEAAAAQAAgAAgABAAEAAAAQAAkAAgABAAEAAAAQAAwAAgABAAEAAAAQAAsAAgABAAEAAAAQAAoAAgABAAEAAAALAAoAAgABAAEAAAALAAsAAgABAAEAAAALAAwAAgABAAEAAAAMAAwAAgABAAEAAAANAAwAAgAAAAkAAAAOAAwAAgACAAkAAAAPAAwAAgABAAEAAAABAAMAAgABAAEAAAAQAAQAAgABAAEAAAAMAA0AAgABAAEAAAANAA0AAgABAAEAAAAOAA0AAgABAAEAAAAPAA0AAgABAAEAAAADAAsAAgAGAAYAAAAEAAgAAgAGAAYAAAAPAAoAAgAHAAYAAAANAAUAAgAHAAYAAAAHAAQAAgAHAAYAAAAIAAcAAgAHAAYAAAANAAsAAgAAAAgAAAAOAAsAAgACAAgAAAACAAQAAgAGAAYAAAA=")
 tile_set = SubResource("TileSet_5g41i")
 
-[node name="Goal" parent="." instance=ExtResource("8_xcayt")]
+[node name="Goal" parent="." unique_id=395411825 instance=ExtResource("8_xcayt")]
 position = Vector2(449, 372)
 
 [connection signal="input_event" from="Rocket" to="Rocket" method="_on_Rocket_input_event"]
