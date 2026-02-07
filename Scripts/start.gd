@@ -16,6 +16,7 @@ func _ready():
 func setup_levels():
 	level_list.add_item("Level 1",null,true)
 	level_list.add_item("Level 2",null,true)
+	level_list.add_item("Level 3",null,true)
 
 func current_level():
 	return level_list.get_selected_items()[0]
@@ -51,6 +52,8 @@ func start():
 			Fade.change_scene_to_file("res://Levels/Level1.tscn")
 		1:
 			Fade.change_scene_to_file("res://Levels/Level2.tscn")
+		2:
+			Fade.change_scene_to_file("res://Levels/Level3.tscn")
 		
 
 func _process(_delta):
