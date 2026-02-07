@@ -381,7 +381,7 @@ text = "High Scores"
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer2" unique_id=1777392379]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
-columns = 3
+columns = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/GridContainer" unique_id=1133683598]
 custom_minimum_size = Vector2(40, 0)
@@ -393,6 +393,10 @@ layout_mode = 2
 text = "asd"
 
 [node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer2/GridContainer" unique_id=1838177209]
+layout_mode = 2
+text = "asdf"
+
+[node name="Label4" type="Label" parent="HBoxContainer/VBoxContainer2/GridContainer" unique_id=1659081201]
 layout_mode = 2
 text = "asdf"
 

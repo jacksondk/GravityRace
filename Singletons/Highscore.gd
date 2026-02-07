@@ -13,6 +13,7 @@ var pending_score = null
 func _init():
 	# Ensure the user name is initialised
 	get_user_name()
+	last_score = null
 
 # Set the user name - store it for next run
 func set_user_name(user_name):
@@ -60,7 +61,8 @@ func get_best(level):
 func add_score(level, score):
 	last_score = score
 	var scores = read_scores(level)
-	scores.append([score, current_name])
+	var timestamp = Time.get_datetime_string_from_system()
+	scores.append([score, current_name, timestamp])
 	print("Adding score %d for %s" % [score, current_name])
 	scores.sort_custom(Callable(SortClass, "sort"))
 	if scores.size() > 10:
@@ -72,7 +74,7 @@ func save_scores(level, scores):
 	var filename = file_name(level)
 	var f = FileAccess.open_encrypted_with_pass(filename, FileAccess.WRITE, "foo")
 	for score in scores:
-		var score_string = "%d;%s" % score
+		var score_string = "%d;%s;%s" % [score[0], score[1], score[2]]
 		f.store_line(score_string)
 	f.close()
 
@@ -80,19 +82,35 @@ func save_scores(level, scores):
 func read_scores(level):
 	var filename = file_name(level)
 	var list = []
-	# Read the encrypted score file if it exists and return a list of [score, name]
+	# Read the encrypted score file if it exists and return a list of [score, name, timestamp]
 	if FileAccess.file_exists(filename):
 		var f = FileAccess.open_encrypted_with_pass(filename, FileAccess.READ, "foo") # encrypted file, so players don't cheat.
 		while not f.eof_reached():
 			var score_string = f.get_line()
 			if score_string == "":
 				continue
-			var split = score_string.split(";", false, 1)
-			if split.size() == 2:
-				# store as [int_score, name]
-				list.append([int(split[0]), (split[1])])
+			var split = score_string.split(";", false)
+			if split.size() >= 2:
+				var timestamp = ""
+				if split.size() >= 3:
+					timestamp = split[2]
+				# store as [int_score, name, timestamp]
+				list.append([int(split[0]), (split[1]), timestamp])
 		f.close()
 	return list
+
+func reset_all_scores():
+	var dir = DirAccess.open("user://")
+	if dir:
+		dir.list_dir_begin()
+		var file = dir.get_next()
+		while file != "":
+			if not dir.current_is_dir() and file.begins_with("hiscores") and file.ends_with(".data"):
+				dir.remove(file)
+			file = dir.get_next()
+		dir.list_dir_end()
+	last_score = null
+	pending_score = null
 
 # Sorter class to sort high score entries [score, player_name]
 class SortClass:

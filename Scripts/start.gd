@@ -2,6 +2,7 @@ extends MarginContainer
 
 var level_list
 var high_score_list
+var f12_handled = false
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -34,15 +35,21 @@ func setup_high_score(level):
 	var pos = "Pos"
 	var time = "Time"
 	var pname = "Name"
+	var date = "Date"
 	var index = 1
 	for item in list:
 		pos = pos + "\n" + str(index)
 		pname = pname + "\n" + item[1]
 		time = time + "\n" + str(item[0])
+		var timestamp = "-"
+		if item.size() >= 3 and item[2] != "":
+			timestamp = item[2]
+		date = date + "\n" + timestamp
 		index = index + 1
 	high_score_list.get_node("Label").text = pos
 	high_score_list.get_node("Label2").text = time
 	high_score_list.get_node("Label3").text = pname
+	high_score_list.get_node("Label4").text = date
 
 func start():
 	var level = current_level()
@@ -63,6 +70,14 @@ func _process(_delta):
 		select_level(current_level()-1)
 	elif Input.is_action_just_pressed("ui_down"):
 		select_level(current_level()+1)
+	
+	if Input.is_key_pressed(KEY_F12):
+		if not f12_handled:
+			Highscore.reset_all_scores()
+			setup_high_score(current_level()+1)
+			f12_handled = true
+	else:
+		f12_handled = false
 
 func set_current_player_name(user_name: String) -> void:
 	Highscore.set_user_name(user_name)
