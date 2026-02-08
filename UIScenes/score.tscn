@@ -2,45 +2,175 @@
 
 [ext_resource type="Script" uid="uid://cda7oiiaxporx" path="res://Scripts/score.gd" id="1_vf1ye"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.08, 0.1, 0.14, 0.92)
+border_width_all = 2
+border_color = Color(0.28, 0.32, 0.4, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+content_margin_left = 24
+content_margin_top = 20
+content_margin_right = 24
+content_margin_bottom = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+bg_color = Color(0.06, 0.07, 0.09, 1)
+border_width_all = 2
+border_color = Color(0.45, 0.5, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_left = 10
+content_margin_top = 6
+content_margin_right = 10
+content_margin_bottom = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input_focus"]
+bg_color = Color(0.06, 0.07, 0.09, 1)
+border_width_all = 2
+border_color = Color(0.95, 0.75, 0.25, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_left = 10
+content_margin_top = 6
+content_margin_right = 10
+content_margin_bottom = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.18, 0.42, 0.72, 1)
+border_width_all = 2
+border_color = Color(0.12, 0.3, 0.56, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+content_margin_left = 16
+content_margin_top = 10
+content_margin_right = 16
+content_margin_bottom = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.22, 0.5, 0.82, 1)
+border_width_all = 2
+border_color = Color(0.12, 0.3, 0.56, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+content_margin_left = 16
+content_margin_top = 10
+content_margin_right = 16
+content_margin_bottom = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.14, 0.34, 0.6, 1)
+border_width_all = 2
+border_color = Color(0.1, 0.24, 0.44, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+content_margin_left = 16
+content_margin_top = 10
+content_margin_right = 16
+content_margin_bottom = 10
+
 [node name="MarginContainer" type="MarginContainer" unique_id=1981240769]
-anchors_preset = -1
-anchor_right = 0.049000002
-anchor_bottom = 0.053000003
-offset_left = 84.0
-offset_right = 779.552
-offset_bottom = 474.296
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 90
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 script = ExtResource("1_vf1ye")
 
+[node name="Card" type="PanelContainer" parent="." unique_id=503183001]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
 [node name="VBox" type="GridContainer" parent="." unique_id=481292307]
 layout_mode = 2
 columns = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 16
 
 [node name="NameLabel" type="Label" parent="VBox" unique_id=1808544837]
 layout_mode = 2
-text = "Name:"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.82, 0.88, 0.98, 1)
+text = "Player Name (editable):"
 
 [node name="NameEdit" type="LineEdit" parent="VBox" unique_id=1379561183]
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input_focus")
 placeholder_text = "Player name"
 
 [node name="ScoreLabel" type="Label" parent="VBox" unique_id=2065106575]
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Score:"
 
 [node name="ScoreValue" type="Label" parent="VBox" unique_id=209574747]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.98, 0.9, 0.55, 1)
 text = "0"
+
+[node name="PositionLabel" type="Label" parent="VBox" unique_id=135269464]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "High Score Position:"
+
+[node name="PositionValue" type="Label" parent="VBox" unique_id=1910670983]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.9, 0.94, 1, 1)
+text = "-"
 
 [node name="DetailsLabel" type="Label" parent="VBox" unique_id=557191120]
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Details:"
 
 [node name="Details" type="Label" parent="VBox" unique_id=1718675222]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.8, 0.86, 0.94, 1)
+autowrap_mode = 3
+
+[node name="ButtonSpacer" type="Control" parent="VBox" unique_id=1569226762]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
 [node name="SaveButton" type="Button" parent="VBox" unique_id=1864883989]
+custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
 text = "Save and Return"
