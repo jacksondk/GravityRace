@@ -22,9 +22,24 @@ var extra_drag
 var powerups
 var level_node
 var started = false
+const GAMEPAD_TRIGGER_DEADZONE = 0.05
+const XBOX_RIGHT_TRIGGER_AXIS = 5
 
 signal goal_entered
 signal crashed
+
+func _get_controller_throttle() -> float:
+	var strongest_trigger := 0.0
+	for device_id in Input.get_connected_joypads():
+		var trigger_value = Input.get_joy_axis(device_id, XBOX_RIGHT_TRIGGER_AXIS)
+		# Some drivers report triggers in [-1..1], others in [0..1].
+		if trigger_value < 0.0:
+			trigger_value = (trigger_value + 1.0) * 0.5
+		trigger_value = clamp(trigger_value, 0.0, 1.0)
+		strongest_trigger = max(strongest_trigger, trigger_value)
+	if strongest_trigger < GAMEPAD_TRIGGER_DEADZONE:
+		return 0.0
+	return strongest_trigger
 
 func add_fuel(extra_fuel):
 	fuel = min(fuel + extra_fuel, max_fuel)
@@ -102,16 +117,17 @@ func _process(delta):
 
 	# Add up forces
 	var force = level_node.gravity
-	if Input.is_action_pressed("ui_up") and fuel > 0:
+	var throttle = max(Input.get_action_strength("ui_up"), _get_controller_throttle())
+	if throttle > 0.0 and fuel > 0:
 		gui.start()
 		started = true
 		var dir_rad = self.get_transform().get_rotation()
-		var dir = Vector2(0,-1).rotated(dir_rad)*level_node.thrust
+		var dir = Vector2(0,-1).rotated(dir_rad)*level_node.thrust*throttle
 		force = force + dir
 		self.get_node("AnimatedSprite2D").play("power")
 		if not self.get_node("AudioStreamPlayer").playing:
 			self.get_node("AudioStreamPlayer").playing = true
-		fuel = fuel-delta*10
+		fuel = max(fuel-delta*10*throttle, 0.0)
 		gui.set_fuel(fuel, max_fuel)		
 	else:
 		self.get_node("AnimatedSprite2D").play("default")
